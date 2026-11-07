@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+    />
+    <title>IG Checker</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #0a0a0a;
+        color: #f0f0f0;
+        font-family: system-ui, sans-serif;
+        min-height: 100vh;
+        padding: 2.5rem 1rem;
+      }
+      .w {
+        max-width: 660px;
+        margin: 0 auto;
+      }
+      .tag {
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #b0ff3e;
+        font-family: monospace;
+        margin-bottom: 0.4rem;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+      }
+      .sub {
+        font-size: 13px;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+      .card {
+        background: #111;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .step {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 1rem;
+      }
+      .step:last-child {
+        margin-bottom: 0;
+      }
+      .num {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(176, 255, 62, 0.1);
+        border: 1px solid rgba(176, 255, 62, 0.4);
+        color: #b0ff3e;
+        font-family: monospace;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .step-title {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+      }
+      .step-desc {
+        font-size: 12px;
+        color: #555;
+        line-height: 1.65;
+      }
+      kbd {
+        display: inline-block;
+        padding: 1px 5px;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 11px;
+        color: #aaa;
+      }
+      .bm-zone {
+        margin: 1rem 0 0.75rem;
+        padding: 1rem 1.25rem;
+        background: rgba(176, 255, 62, 0.07);
+        border: 1px solid rgba(176, 255, 62, 0.25);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .bm-zone p {
+        font-size: 13px;
+        color: #ccc;
+        line-height: 1.5;
+      }
+      .bm-zone span {
+        color: #b0ff3e;
+        font-weight: 500;
+      }
+      .bm-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 18px;
+        background: #b0ff3e;
+        color: #0a0a0a;
+        font-family: monospace;
+        font-size: 12px;
+        font-weight: 500;
+        border-radius: 6px;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: grab;
+        flex-shrink: 0;
+      }
+      .warn {
+        background: rgba(255, 92, 92, 0.07);
+        border: 1px solid rgba(255, 92, 92, 0.2);
+        border-radius: 6px;
+        padding: 0.65rem 0.9rem;
+        font-size: 12px;
+        color: #ff9f9f;
+        line-height: 1.6;
+        margin-top: 0.75rem;
+      }
+      .divider {
+        height: 1px;
+        background: #1a1a1a;
+        margin: 1.5rem 0;
+      }
+      .code {
+        background: #0f0f0f;
+        border: 1px solid #1e1e1e;
+        border-radius: 6px;
+        padding: 0.85rem 1rem;
+        font-family: monospace;
+        font-size: 11px;
+        color: #7ec8e3;
+        margin: 0.6rem 0;
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 1.7;
+        max-height: 220px;
+        overflow-y: auto;
+      }
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        background: transparent;
+        border: 1px solid #222;
+        border-radius: 5px;
+        color: #555;
+        font-family: monospace;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.15s;
+        margin-top: 0.5rem;
+      }
+      .copy-btn:hover {
+        border-color: #b0ff3e;
+        color: #b0ff3e;
+      }
+      .copy-btn.ok {
+        border-color: #4caf50;
+        color: #4caf50;
+      }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid #1a1a1a;
+        font-size: 11px;
+        color: #333;
+        font-family: monospace;
+        line-height: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w">
+      <div class="tag">// instagram toolkit</div>
+      <h1>Quem não te segue de volta</h1>
+      <p class="sub">
+        Bookmarklet que roda dentro do instagram.com — sem extensões, sem
+        servidores externos.
+      </p>
+
+      <div class="card">
+        <div class="tag">bookmarklet</div>
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <div class="step-title">Mostre a barra de favoritos</div>
+            <div class="step-desc">
+              Chrome/Edge: <kbd>Ctrl+Shift+B</kbd> &nbsp;·&nbsp; Firefox:
+              <kbd>Ctrl+B</kbd>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <div class="step-title">
+              Arraste o botão para a barra de favoritos
+            </div>
+            <div class="bm-zone">
+              <p>Arraste para a barra →<br /><span>IG Checker</span></p>
+              <a class="bm-link" id="bm" href="#">&#128202; IG Checker</a>
+            </div>
+            <div class="warn">
+              &#9888; Se arrastar não funcionar: clique com botão direito no
+              botão acima → "Copiar endereço do link" → crie um favorito
+              manualmente e cole como URL.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <div class="step-title">Abra o Instagram e clique no favorito</div>
+            <div class="step-desc">
+              Vá para <strong style="color: #f0f0f0">instagram.com</strong>,
+              faça login e clique em
+              <strong style="color: #b0ff3e">IG Checker</strong> na barra.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card">
+        <div class="tag">alternativa — console devtools</div>
+        <div
+          class="step-desc"
+          style="font-size: 13px; color: #555; margin-bottom: 0.75rem"
+        >
+          No instagram.com, pressione <kbd>F12</kbd> → aba <kbd>Console</kbd>,
+          cole e execute:
+        </div>
+        <button class="copy-btn" id="cbtn" onclick="copyScript()">
+          &#8984; Copiar script
+        </button>
+        <pre class="code" id="ccode"></pre>
+      </div>
+
+      <footer>
+        100% local &middot; nenhum dado enviado a servidores externos<br />use
+        com moderação para evitar rate limit
+      </footer>
+    </div>
+    <script>
+      const RAW = `__INJECT_MINIFIED_SCRIPT_HERE__`;
+      const BOOKMARKLET = "javascript:" + RAW;
+      document.getElementById("ccode").textContent = BOOKMARKLET;
+      document.getElementById("bm").href = BOOKMARKLET;
+      function copyScript() {
+        navigator.clipboard.writeText(BOOKMARKLET).then(() => {
+          const b = document.getElementById("cbtn");
+          b.textContent = "✓ Copiado!";
+          b.classList.add("ok");
+          setTimeout(() => {
+            b.textContent = "⎘ Copiar script";
+            b.classList.remove("ok");
+          }, 2000);
+        });
+      }
+    </script>
+  </body>
+</html>

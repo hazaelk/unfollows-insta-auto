@@ -1,0 +1,1 @@
+deixe este codigo mais facilmente legivel implemente corretamente o botao input chwckbox para selecionar todos os elementos. deixe o texto do botao unfollow dinamico para que quando seja ''deixar de seguir'' para source = seguindo e nao seguidores e ''remover seguidores'' para source = seguindo

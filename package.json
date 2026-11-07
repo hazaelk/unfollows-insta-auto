@@ -1,0 +1,12 @@
+{
+  "name": "ig-checker-builder",
+  "version": "1.0.0",
+  "description": "Minify code.js and embed into instagram_checkerv2.html",
+  "private": true,
+  "scripts": {
+    "build": "node minify_and_embed.js"
+  },
+  "dependencies": {
+    "terser": "^5.20.0"
+  }
+}
