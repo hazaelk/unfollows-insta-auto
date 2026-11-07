@@ -1,3 +1,15 @@
+# IG Checker — instruções de uso
+1. Abra o arquivo __instagram_checkerv2.embedded.html__
+2. Clique, segure e arraste o ***IG Checker*** para a barra de favoritos
+3. Abra o instagram web, normalmente
+4. Clique no icone do IG Checker na sua barra de favoritos.
+
+# IG Checker — use instructions
+1. Open the file __instagram_checkerv2.embedded.html__
+2. Click, hold, and drag the ***IG Checker*** to your bookmarks bar
+3. Open Instagram Web as you normally would
+4. Click the IG Checker icon in your bookmarks bar.
+
 # IG Checker — build instructions
 
 This workspace contains:
